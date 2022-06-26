@@ -1,0 +1,22 @@
+# RexxFile, a file utility
+# Copyright 1999 Patrick TJ McPhee
+# released under latex public license
+
+CFLAGS=-g -fpic -I $$HOME/regina -pipe
+LDFLAGS=-Bdynamic -Bshareable
+LIBS=-lm
+LIBFILE=librexxfile.so
+
+# object files
+OBJS=rexxfile.o
+
+all : $(LIBFILE)
+
+$(LIBFILE) : $(OBJS)
+	$(LD) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBFILE)
+
+$(OBJS) :: rxproto.h
+
+clean:
+	-rm *.o *.so
+

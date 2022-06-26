@@ -1,0 +1,28 @@
+# RexxFile, a file utility
+# Copyright 1999 Patrick TJ McPhee
+# released under latex public license
+
+DEBUG=-Zi
+DOPT=-Ox -G5
+INCDIR=../Regina
+LIBDIR=..\Regina
+CFLAGS=$(OPT) $(DEBUG) -nologo -GF -I$(INCDIR) -MD
+CPPFLAGS=$(OPT) $(DEBUG) -GF -I$(INCDIR) -MD
+LDFLAGS=-LD $(OPT) $(DEBUG) -MD
+CDYNFLAGS=-DDYNAMIC -GD
+CSTTFLAGS=-GA
+CC=cl
+
+OBJS=rexxfile.obj
+
+rexxfile.dll : $(OBJS) rexxfile.def
+	$(CC) $(CFLAGS) $(LDFLAGS) -Ferexxfile.dll $(OBJS) -link /def:rexxfile.def kernel32.lib advapi32.lib $(LIBDIR)\regina.lib user32.lib
+
+rexxfile.obj : rexxfile.c rxproto.h
+
+dist:
+	$(MAKE) $(MAKEFLAGS) OPT="$(DOPT)" DEBUG=""
+
+
+clean:
+	del /f *.obj *.pdb *.lib *.dll *.exp *.ilk

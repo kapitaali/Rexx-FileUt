@@ -1,0 +1,27 @@
+# RexxFile, a file utility
+# Copyright 1999 Patrick TJ McPhee
+# released under latex public license
+
+DEBUG=-g
+DOPT=-xO2
+CFLAGS=$(DEBUG) $(OPT) -Kpic -xstrconst -I $$HOME/regina
+LDFLAGS=-G $(LFL)
+LIBS=
+LIBFILE=librexxfile.so
+
+# object files
+OBJS=rexxfile.o
+
+all : $(LIBFILE)
+
+dist :
+	$(MAKE) OPT="$(DOPT)" DEBUG="" LFL=-s
+
+$(LIBFILE) : $(OBJS)
+	$(LD) $(LDFLAGS) $(OBJS) $(LIBS) -o $(LIBFILE)
+
+$(OBJS) :: rxproto.h
+
+clean:
+	-rm *.o *.so
+

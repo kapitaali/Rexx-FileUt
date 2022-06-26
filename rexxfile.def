@@ -1,0 +1,12 @@
+LIBRARY REXXFILE
+DESCRIPTION 'Rexx File Library'
+
+EXPORTS
+	filecharin
+	fileclose
+	filedropfuncs
+	filelinein
+	filelineout
+	filelines
+	fileloadfuncs
+	fileopen

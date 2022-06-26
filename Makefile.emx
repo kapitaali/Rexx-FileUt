@@ -1,0 +1,27 @@
+# RexxFile, a file utility
+# Copyright 1999 Patrick TJ McPhee
+# released under latex public license
+
+CC=gcc
+CFLAGS=-Zdll -Zomf -Zcrtdll -O2 -pipe
+LDFLAGS=
+LIBS=
+LIBFILE=rexxfile.dll
+
+# object files
+OBJS=rexxfile.obj
+
+all : $(LIBFILE)
+
+$(LIBFILE) : $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) rexxfile.def $(LIBS) -o $(LIBFILE)
+
+%.obj : %.c
+	$(CC) $(CFLAGS) -c $<
+
+
+$(OBJS) :: rxproto.h
+
+clean:
+	-rm *.obj *.lib *.dll
+
